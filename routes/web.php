@@ -1,12 +1,5 @@
 <?php
 
-use App\Http\Controllers\MovieController;
-use App\Http\Controllers\MusicController;
-use Illuminate\Support\Facades\Route;
+use Livewire\Volt\Volt;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/browse_musics', [MusicController::class, 'show']);
-Route::get('/browse_movies', [MovieController::class, 'show']);
+Volt::route('/', 'users.index');
