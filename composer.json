@@ -9,10 +9,7 @@
         "jenssegers/mongodb": "^4.5",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
-        "livewire/livewire": "^3.5",
-        "livewire/volt": "^1.6",
-        "mongodb/laravel-mongodb": "4.5",
-        "robsontenorio/mary": "^1.34"
+        "mongodb/laravel-mongodb": "4.5"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
