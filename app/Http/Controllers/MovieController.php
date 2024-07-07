@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Music;
+use App\Models\Movie;
 use Illuminate\Http\Request;
 
-class MusicController extends Controller
+class MovieController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,17 +34,17 @@ class MusicController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Music $music)
+    public function show(Movie $movie)
     {
-        return view('browse_musics', [
-            'musics' => Music::where('tone', "A")->get()
+        return view('browse_movies', [
+            'movies' => Movie::all()
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Music $music)
+    public function edit(Movie $movie)
     {
         //
     }
@@ -52,7 +52,7 @@ class MusicController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Music $music)
+    public function update(Request $request, Movie $movie)
     {
         //
     }
@@ -60,7 +60,7 @@ class MusicController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Music $music)
+    public function destroy(Movie $movie)
     {
         //
     }
