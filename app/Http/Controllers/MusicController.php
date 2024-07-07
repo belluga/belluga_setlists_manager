@@ -36,7 +36,7 @@ class MusicController extends Controller
      */
     public function show(Music $music)
     {
-        return view('browse_musics', [
+        return view('musics', [
             'musics' => Music::where('tone', "A")->get()
         ]);
     }

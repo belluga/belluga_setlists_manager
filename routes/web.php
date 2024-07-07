@@ -5,8 +5,15 @@ use App\Http\Controllers\MusicController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard');
 });
 
-Route::get('/browse_musics', [MusicController::class, 'show']);
-Route::get('/browse_movies', [MovieController::class, 'show']);
+Route::get('/register', function () {
+    return view('auth.register');
+})->name('register');
+
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
+
+Route::get('/musics', [MusicController::class, 'show']);
