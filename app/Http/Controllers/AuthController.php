@@ -20,34 +20,25 @@ class AuthController extends Controller
         $user = User::create($validated_fields);
         Auth::login($user);
 
-        return redirect()->route('home');
-
-
-
-        //register
-
-        //login
-
-        //redirect
+        return redirect()->intended();
     }
 
     public function login(Request $request)
     {
-        //validate
-        $request->validate([
+        $validated_credentials = $request->validate([
             'email' => ['required', 'max:255', 'email'],
             'password' => ['required'],
         ]);
 
-        //register
+        $logged_in = Auth::attempt(
+            $validated_credentials,
+            $request->remember
+        );
 
-        //login
+        if($logged_in){
+            return redirect()->intended();
+        }
 
-        //redirect
-    }
-
-    protected function _redirect()
-    {
-        // return route()->redirect->intended();
+        return back()->withErrors(['login_error' => 'Email ou senha incorretos.']);
     }
 }
