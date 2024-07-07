@@ -12,7 +12,8 @@
 
             </div>
             <div class="text-sm font-light text-[#6B7280] pb-8 mx-auto">Login to your account on Your Company.</div>
-            <form class="flex flex-col">
+            <form class="flex flex-col" method="post" action="{{ route('login') }}">
+                @csrf
                 <div class="pb-2">
                     <label for="email" class="block mb-2 text-sm font-medium text-[#111827]">Email</label>
                     <div class="relative text-gray-400"><span
@@ -23,10 +24,13 @@
                                 <rect width="20" height="16" x="2" y="4" rx="2"></rect>
                                 <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
                             </svg></span>
-                        <input type="email" name="email" id="email"
-                            class="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4"
+                        <input type="text" name="email" id="email"
+                            class="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4 @error('email') ring-red-500 @enderror"
                             placeholder="name@company.com" autocomplete="off">
                     </div>
+                    @error('email')
+                        <p class="error">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="pb-6">
                     <label for="password" class="block mb-2 text-sm font-medium text-[#111827]">Password</label>
@@ -41,9 +45,12 @@
                                 <path d="m8.5 10 7 4"></path>
                             </svg></span>
                         <input type="password" name="password" id="password" placeholder="••••••••••"
-                            class="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4"
+                            class="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4 @error('password') ring-red-500 @enderror"
                             autocomplete="new-password" aria-autocomplete="list">
                     </div>
+                    @error('password')
+                        <p class="error">{{ $message }}</p>
+                    @enderror
                 </div>
                 <button type="submit"
                     class="w-full text-[#FFFFFF] bg-[#4F46E5] focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-6">Login</button>
