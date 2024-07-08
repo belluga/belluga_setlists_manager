@@ -14,16 +14,10 @@
 
         <section data-section-id="1" data-share="" data-category="dashboard-navigations"
             data-component-id="7ebd38e1_01_awz" class="overflow-hidden min-h-full" data-container="1">
-            <div class="relative z-50 flex items-center justify-between xl:hidden bg-coolGray-900 px-8 py-5 -mx-3"
+            <div class="relative z-50 flex items-center justify-between lg:hidden bg-coolGray-900 px-8 py-5 -mx-3"
                 data-config-id="toggle-mobile" data-config-target=".navbar-menu" data-config-class="hidden">
                 <div class="w-auto px-3">
-                    <a class="block max-w-max" href="#">
-                        <img src="flex-ui-assets/logos/dashboard/flex-ui-green.svg" alt=""
-                            data-config-id="auto-img-1-1">
-                    </a>
-                </div>
-                <div class="w-auto px-3">
-                    <button class="navbar-burger self-center ml-auto block xl:hidden">
+                    <button class="navbar-burger self-center ml-auto block lg:hidden">
                         <svg width="35" height="35" viewbox="0 0 32 32" fill="none"
                             xmlns="http://www.w3.org/2000/svg" data-config-id="auto-svg-1-1">
                             <rect class="text-coolGray-800" width="32" height="32" rx="6"
@@ -34,11 +28,17 @@
                         </svg>
                     </button>
                 </div>
+                <div class="w-auto px-3">
+                    <a class="block max-w-max" href="#">
+                        <img src="flex-ui-assets/logos/dashboard/flex-ui-green.svg" alt=""
+                            data-config-id="auto-img-1-1">
+                    </a>
+                </div>
             </div>
 
             <x-main.side_nav />
 
-            <div class="xl:ml-80" data-bucket="1">
+            <div class="lg:ml-80" data-bucket="1">
                 <header>
                     @yield('header')
                 </header>

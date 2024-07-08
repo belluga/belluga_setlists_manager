@@ -1,6 +1,6 @@
 <div
-    class="navbar-menu z-50 fixed top-0 hidden flex xl:flex flex-col justify-between bg-coolGray-900 max-w-xs w-9/12 h-full overflow-y-auto">
-    <div class="navbar-backdrop fixed xl:hidden inset-0 bg-coolGray-900 opacity-60"></div>
+    class="navbar-menu z-50 fixed top-0 hidden flex lg:flex flex-col justify-between bg-coolGray-900 max-w-xs w-9/12 h-full overflow-y-auto">
+    <div class="navbar-backdrop fixed lg:hidden inset-0 bg-coolGray-900 opacity-60"></div>
     <div class="relative bg-coolGray-900">
         <div class="fixed -left-4 p-8 pl-12 max-w-xs w-9/12 z-50 bg-coolGray-900">
             <a class="block max-w-max" href="#">
