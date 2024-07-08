@@ -1,12 +1,11 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\MovieController;
 use App\Http\Controllers\MusicController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('dashboard');
+    return view('dashboard.dashboard');
 })->name('home');
 
 Route::get('/register', function () {
@@ -20,5 +19,7 @@ Route::get('/login', function () {
 })->name('login');
 
 Route::post('/login', [AuthController::class, 'login']);
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/musics', [MusicController::class, 'show']);

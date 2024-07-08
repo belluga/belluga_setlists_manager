@@ -14,42 +14,44 @@
             <div class="text-sm font-light text-[#6B7280] pb-8 mx-auto">Login to your account on Your Company.</div>
             <form class="flex flex-col" action="{{ route('register') }}" method="post">
                 @csrf
-                <div class="pb-2">
-                    <label for="first_name" class="block mb-2 text-sm font-medium text-[#111827]">Primeiro nome?</label>
-                    <div class="relative text-gray-400"><span
-                            class="absolute inset-y-0 left-0 flex items-center p-1 pl-3"><svg
-                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="lucide lucide-user">
-                                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                                <circle cx="12" cy="7" r="4" />
-                            </svg></path>
-                            </svg></span>
-                        <input type="text" name="first_name" id="first_name" value="{{ old('first_name') }}"
-                            class="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-half p-2.5 rounded-l-lg py-3 px-4 @error('first_name') ring-red-500 @enderror"
-                            placeholder="Fulano" autocomplete="off">
+                <div class="lg:flex lg:gap-4">
+                    <div class="pb-2 lg:flex-grow">
+                        <label for="first_name" class="block mb-2 text-sm font-medium text-[#111827]">Primeiro nome?</label>
+                        <div class="relative text-gray-400"><span
+                                class="absolute inset-y-0 left-0 flex items-center p-1 pl-3"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-user">
+                                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                                    <circle cx="12" cy="7" r="4" />
+                                </svg></path>
+                                </svg></span>
+                            <input type="text" name="first_name" id="first_name" value="{{ old('first_name') }}"
+                                class="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4 @error('first_name') ring-red-500 @enderror"
+                                placeholder="Fulano" autocomplete="off">
+                        </div>
+                        @error('first_name')
+                            <p class="error">{{ $message }}</p>
+                        @enderror
                     </div>
-                    @error('first_name')
-                        <p class="error">{{ $message }}</p>
-                    @enderror
-                </div>
-                <div class="pb-2">
-                    <label for="last_name" class="block mb-2 text-sm font-medium text-[#111827]">Sobrenome</label>
-                    <div class="relative text-gray-400"><span
-                            class="absolute inset-y-0 left-0 flex items-center p-1 pl-3"><svg
-                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="lucide lucide-user">
-                                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                                <circle cx="12" cy="7" r="4" />
-                            </svg></span>
-                        <input type="text" name="last_name" id="last_name" value="{{ old('last_name') }}"
-                            class="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-half p-2.5 rounded-l-lg py-3 px-4 @error('last_name') ring-red-500 @enderror"
-                            placeholder="de Tal" autocomplete="off">
+                    <div class="pb-2 lg:flex-grow">
+                        <label for="last_name" class="block mb-2 text-sm font-medium text-[#111827]">Sobrenome</label>
+                        <div class="relative text-gray-400"><span
+                                class="absolute inset-y-0 left-0 flex items-center p-1 pl-3"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-user">
+                                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                                    <circle cx="12" cy="7" r="4" />
+                                </svg></span>
+                            <input type="text" name="last_name" id="last_name" value="{{ old('last_name') }}"
+                                class="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4 @error('last_name') ring-red-500 @enderror"
+                                placeholder="de Tal" autocomplete="off">
+                        </div>
+                        @error('last_name')
+                            <p class="error">{{ $message }}</p>
+                        @enderror
                     </div>
-                    @error('last_name')
-                        <p class="error">{{ $message }}</p>
-                    @enderror
                 </div>
                 <div class="pb-2">
                     <label for="email" class="block mb-2 text-sm font-medium text-[#111827]">Email</label>

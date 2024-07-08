@@ -10,10 +10,7 @@
 </head>
 
 <body>
-    <div>
-        @yield('main')
-    </div>
-
+    @yield('main')
 </body>
 
 </html>

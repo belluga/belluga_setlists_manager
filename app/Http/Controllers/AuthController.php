@@ -35,10 +35,18 @@ class AuthController extends Controller
             $request->remember
         );
 
-        if($logged_in){
+        if ($logged_in) {
             return redirect()->intended();
         }
 
         return back()->withErrors(['login_error' => 'Email ou senha incorretos.']);
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('home');
     }
 }
