@@ -25,6 +25,10 @@ Route::middleware('auth')->group(function () {
     })->name('home');
 
     Route::get('/music/{slug}', [MusicController::class, 'show_single']);
+    Route::get('/music_create', function () {
+        return view('musics.music_create');
+    })->name('music_create');
+    Route::post('/music/new', [MusicController::class, 'create']);
     Route::get('/musics_my', [MusicController::class, 'show_my'])->name('musics_my');
     Route::get('/musics_shared_with_me', [MusicController::class, 'show_shared_with_me'])->name('musics_shared');
 

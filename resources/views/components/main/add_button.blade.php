@@ -1,3 +1,6 @@
+@if (isset($route))
+    <a href="{{ route($route) }}">
+@endif
 <button
     class="flex flex-wrap items-center justify-center py-3 px-4 w-full text-base text-white font-medium bg-green-500 hover:bg-green-600 rounded-md shadow-button">
     <svg class="mr-2" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -8,3 +11,6 @@
     </svg>
     <span data-config-id="auto-txt-4-1">{{ $label }}</span>
 </button>
+@if (isset($route))
+    </a>
+@endif

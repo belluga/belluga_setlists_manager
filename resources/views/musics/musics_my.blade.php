@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('header')
-    <x-main.page_header title="Minhas Músicas" description="Descrição qualquer" labelbutton="Música" />
+    <x-main.page_header title="Minhas Músicas" description="Descrição qualquer" buttonLabel="Música" buttonRoute="music_create"  />
 @endsection
 
 @section('main')

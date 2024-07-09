@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('header')
-    <x-main.page_header title="Dashboard" description="Descrição qualquer" labelbutton="Repertório" />
+    <x-main.page_header title="Dashboard" description="Descrição qualquer" buttonLabel="Repertório" />
 @endsection
 
 @section('main')
