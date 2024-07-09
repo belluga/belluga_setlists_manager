@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Music;
+use App\Models\MusicGenre;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -44,6 +45,12 @@ class MusicController extends Controller
             ['owner' => Auth::id(), ...$validated_data]
         );
 
+        $genre = new MusicGenre();
+        $genre->name = "Rock Alternativo";
+        $genre->parent = "Rock";
+
+        $music->genres()->attach($genre);
+
         return redirect()->route('music.show', ['music' => $music]);
     }
 
@@ -62,6 +69,10 @@ class MusicController extends Controller
      */
     public function show_my()
     {
+
+        $genres = MusicGenre::all();
+
+        dd($genres);
 
         $musics = Music::where(["owner" => new ObjectId(Auth::user()->id)])->get();
 
