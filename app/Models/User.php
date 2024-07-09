@@ -6,6 +6,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use MongoDB\Laravel\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use MongoDB\Laravel\Eloquent\Casts\ObjectId;
+use MongoDB\Laravel\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -33,15 +35,18 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
+    public function musics(): HasMany
+    {
+        return $this->hasMany(Music::class, "musics");
+    }
+
     protected function casts(): array
     {
         return [
+            'id' => ObjectId::class,
             'email_verified_at' => 'datetime',
+            'updated_at' => 'datetime',
+            'created_at' => 'datetime',
             'password' => 'hashed',
         ];
     }
