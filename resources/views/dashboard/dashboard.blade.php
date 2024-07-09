@@ -1,9 +1,9 @@
 @extends('layouts.main')
 
 @section('header')
-    <x-main.page_header title="Dashboard" description="Descrição qualquer" />
+    <x-main.page_header title="Dashboard" description="Descrição qualquer" labelbutton="Repertório" />
 @endsection
 
 @section('main')
-    <p>Teste</p>
+    <p>This is the dashboard content</p>
 @endsection

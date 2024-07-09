@@ -36,14 +36,14 @@
                 </div>
             </div>
 
-            <x-main.side_nav />
+            <x-side_menu />
 
             <div class="lg:ml-80" data-bucket="1">
                 <header>
                     @yield('header')
                 </header>
 
-                <main>
+                <main class="p-12">
                     @yield('main')
                 </main>
             </div>

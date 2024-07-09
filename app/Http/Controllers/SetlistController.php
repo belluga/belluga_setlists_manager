@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Music;
 use Illuminate\Http\Request;
 
-class MusicController extends Controller
+class SetlistController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,7 +36,7 @@ class MusicController extends Controller
      */
     public function show_single(Music $music)
     {
-        return view('musics.musics_my', [
+        return view('setlists.setlitsts_my', [
             'musics' => Music::where('tone', "A")->get()
         ]);
     }
@@ -46,7 +46,7 @@ class MusicController extends Controller
      */
     public function show_my(Music $music)
     {
-        return view('musics.musics_my', [
+        return view('setlists.setlitsts_my', [
             'musics' => Music::where('tone', "A")->get()
         ]);
     }
@@ -56,7 +56,7 @@ class MusicController extends Controller
      */
     public function show_shared_with_me(Music $music)
     {
-        return view('musics.musics_shared_with_me', [
+        return view('setlists.setlitsts_shared_with_me', [
             'musics' => Music::where('tone', "A")->get()
         ]);
     }
