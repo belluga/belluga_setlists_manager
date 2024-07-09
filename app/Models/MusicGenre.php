@@ -2,14 +2,22 @@
 
 namespace App\Models;
 
-use MongoDB\Laravel\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class MusicGenre extends Model
 {
-    protected $connection = 'mongodb';
-
     protected $fillable = [
-        "parent",
         "name",
     ];
+
+    public function parent(): HasOne {
+        return $this->hasOne(MusicGenre::class);
+    }
+
+    public function music(): BelongsToMany
+    {
+        return $this->belongsToMany(Music::class);
+    }
 }

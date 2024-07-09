@@ -8,7 +8,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
-use MongoDB\BSON\ObjectId;
 
 class MusicController extends Controller
 {
@@ -41,15 +40,17 @@ class MusicController extends Controller
             ]
         );
 
+        // dd(
+        //     [
+        //         'auth_id' => Auth::id(),
+        //         'validated_data' => $validated_data
+        //     ]
+
+        // );
+
         $music = Music::create(
             ['owner' => Auth::id(), ...$validated_data]
         );
-
-        $genre = new MusicGenre();
-        $genre->name = "Rock Alternativo";
-        $genre->parent = "Rock";
-
-        $music->genres()->attach($genre);
 
         return redirect()->route('music.show', ['music' => $music]);
     }
@@ -64,17 +65,19 @@ class MusicController extends Controller
         ]);
     }
 
+    static public function getCurrentUser(): User
+    {
+        return Auth::user();
+    }
+
     /**
      * Display the specified resource.
      */
     public function show_my()
     {
+        $user = MusicController::getCurrentUser();
 
-        $genres = MusicGenre::all();
-
-        dd($genres);
-
-        $musics = Music::where(["owner" => new ObjectId(Auth::user()->id)])->get();
+        $musics = $user->musics()->get();
 
         return view('musics.musics_my', [
             'musics' => $musics,

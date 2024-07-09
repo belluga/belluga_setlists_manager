@@ -2,18 +2,15 @@
 
 namespace App\Models;
 
-use MongoDB\Laravel\Eloquent\Model;
-use MongoDB\Laravel\Relations\BelongsTo;
-use MongoDB\Laravel\Relations\BelongsToMany;
-use MongoDB\Laravel\Eloquent\Casts\ObjectId;
-use MongoDB\Laravel\Relations\EmbedsMany;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Music extends Model
 {
 
-    protected $connection = "mongodb";
-
-    protected $collection = "musics";
+    protected $table = "musics";
 
     protected $fillable = [
         "name",
@@ -23,6 +20,7 @@ class Music extends Model
         "genres",
         "play_settings",
         "raw_content",
+        "shared_with",
         "owner"
     ];
 
@@ -36,15 +34,8 @@ class Music extends Model
         return $this->belongsToMany(User::class, "shared_with");
     }
 
-    public function genres(): EmbedsMany
+    public function genres(): HasMany
     {
-        return $this->embedsMany(MusicGenre::class);
-    }
-
-    protected function casts(): array
-    {
-        return [
-            'owner' => ObjectId::class,
-        ];
+        return $this->hasMany(MusicGenre::class);
     }
 }
