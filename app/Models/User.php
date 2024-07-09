@@ -39,6 +39,12 @@ class User extends Authenticatable
         return $this->hasMany(Music::class, "owner");
     }
 
+
+    public function musics_shared_with_me(): HasMany
+    {
+        return $this->hasMany(Music::class, "shared_with");
+    }
+
     protected function casts(): array
     {
         return [

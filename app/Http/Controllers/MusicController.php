@@ -63,28 +63,13 @@ class MusicController extends Controller
         ]);
     }
 
-    static public function getUser(): User
-    {
-        return Auth::user();
-    }
-
     /**
      * Display the specified resource.
      */
     public function show_my()
     {
 
-        $user = MusicController::getUser();
-
-        $musics = $user->musics()->get();
-
-        // dd($musics);
-
-        $genres = Music::where(['owner' => Auth::id()])->select('genres.parent')->distinct()->get();
-
-        dd($genres);
-
-        // $musics = Music::where(["owner" => new ObjectId(Auth::user()->id)])->get();
+        $musics = Auth::user()->musics;
 
         return view('musics.musics_my', [
             'musics' => $musics,
@@ -96,8 +81,10 @@ class MusicController extends Controller
      */
     public function show_shared_with_me(Music $music)
     {
+        $musics = Auth::user()->musics_shared_with_me;
+
         return view('musics.musics_shared_with_me', [
-            'musics' => Music::where('tone', "A")->get()
+            'musics' => $musics,
         ]);
     }
 
