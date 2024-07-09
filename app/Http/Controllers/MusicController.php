@@ -8,7 +8,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
-use MongoDB\BSON\ObjectId;
 
 class MusicController extends Controller
 {
@@ -81,9 +80,9 @@ class MusicController extends Controller
 
         // dd($musics);
 
-        // $genres = MusicGenre::all();
+        $genres = Music::where(['owner' => Auth::id()])->select('genres.parent')->distinct()->get();
 
-        // dd($genres);
+        dd($genres);
 
         // $musics = Music::where(["owner" => new ObjectId(Auth::user()->id)])->get();
 
