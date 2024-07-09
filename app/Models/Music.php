@@ -5,7 +5,6 @@ namespace App\Models;
 use MongoDB\Laravel\Eloquent\Model;
 use MongoDB\Laravel\Relations\BelongsTo;
 use MongoDB\Laravel\Relations\BelongsToMany;
-use MongoDB\Laravel\Eloquent\Casts\ObjectId;
 use MongoDB\Laravel\Relations\EmbedsMany;
 
 class Music extends Model
@@ -39,12 +38,5 @@ class Music extends Model
     public function genres(): EmbedsMany
     {
         return $this->embedsMany(MusicGenre::class);
-    }
-
-    protected function casts(): array
-    {
-        return [
-            'owner' => ObjectId::class,
-        ];
     }
 }

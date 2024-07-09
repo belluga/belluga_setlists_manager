@@ -64,17 +64,28 @@ class MusicController extends Controller
         ]);
     }
 
+    static public function getUser(): User
+    {
+        return Auth::user();
+    }
+
     /**
      * Display the specified resource.
      */
     public function show_my()
     {
 
-        $genres = MusicGenre::all();
+        $user = MusicController::getUser();
 
-        dd($genres);
+        $musics = $user->musics()->get();
 
-        $musics = Music::where(["owner" => new ObjectId(Auth::user()->id)])->get();
+        // dd($musics);
+
+        // $genres = MusicGenre::all();
+
+        // dd($genres);
+
+        // $musics = Music::where(["owner" => new ObjectId(Auth::user()->id)])->get();
 
         return view('musics.musics_my', [
             'musics' => $musics,

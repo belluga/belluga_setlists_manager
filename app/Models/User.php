@@ -6,7 +6,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use MongoDB\Laravel\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use MongoDB\Laravel\Eloquent\Casts\ObjectId;
 use MongoDB\Laravel\Relations\HasMany;
 
 class User extends Authenticatable
@@ -37,13 +36,12 @@ class User extends Authenticatable
 
     public function musics(): HasMany
     {
-        return $this->hasMany(Music::class, "musics");
+        return $this->hasMany(Music::class, "owner");
     }
 
     protected function casts(): array
     {
         return [
-            'id' => ObjectId::class,
             'email_verified_at' => 'datetime',
             'updated_at' => 'datetime',
             'created_at' => 'datetime',
