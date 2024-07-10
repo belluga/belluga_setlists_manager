@@ -29,10 +29,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/music/{music}', [MusicController::class, 'show'])->name('music.show');
     Route::get('/music_create', [MusicController::class, 'create'])->name('music_create');
     Route::post('/music_create', [MusicController::class, 'store']);
+    Route::get('/musics', [MusicController::class, 'show_my'])->name('musics');
     Route::get('/musics_my', [MusicController::class, 'show_my'])->name('musics_my');
     Route::get('/musics_shared_with_me', [MusicController::class, 'show_shared_with_me'])->name('musics_shared');
 
     Route::get('/setlist/{setlist}', [SetlistController::class, 'show_single']);
+    Route::get('/setlists', [SetlistController::class, 'show_my'])->name('setlists');
     Route::get('/setlists_my', [SetlistController::class, 'show_my'])->name('setlists_my');
     Route::get('/setlists_shared_with_me', [SetlistController::class, 'show_shared_with_me'])->name('setlists_shared');
 
