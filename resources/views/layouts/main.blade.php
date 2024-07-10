@@ -1,54 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ env('APP_NAME') }}</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png" />
+    <link rel="icon" type="image/png" href="./assets/img/favicon.png" />
+    <title>Soft UI Dashboard Tailwind</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <!-- Nucleo Icons -->
+    <link href="./assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="./assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Popper -->
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <!-- Main Styling -->
+    <link href="./assets/css/soft-ui-dashboard-tailwind.css?v=1.0.5" rel="stylesheet" />
+    <!-- Nepcha Analytics (nepcha.com) -->
+    <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
+    <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+
 </head>
 
-<body>
-    <div class="" id="content">
+<body class="m-0 font-sans text-base antialiased font-normal leading-default bg-gray-50 text-slate-500">
 
-        <section data-section-id="1" data-share="" data-category="dashboard-navigations"
-            data-component-id="7ebd38e1_01_awz" class="overflow-hidden min-h-full" data-container="1">
-            <div class="relative z-50 flex items-center justify-between lg:hidden bg-coolGray-900 px-8 py-5 -mx-3"
-                data-config-id="toggle-mobile" data-config-target=".navbar-menu" data-config-class="hidden">
-                <div class="w-auto px-3">
-                    <button class="navbar-burger self-center ml-auto block lg:hidden">
-                        <svg width="35" height="35" viewbox="0 0 32 32" fill="none"
-                            xmlns="http://www.w3.org/2000/svg" data-config-id="auto-svg-1-1">
-                            <rect class="text-coolGray-800" width="32" height="32" rx="6"
-                                fill="currentColor"></rect>
-                            <path class="text-coolGray-400"
-                                d="M7 12H25C25.2652 12 25.5196 11.8946 25.7071 11.7071C25.8946 11.5196 26 11.2652 26 11C26 10.7348 25.8946 10.4804 25.7071 10.2929C25.5196 10.1054 25.2652 10 25 10H7C6.73478 10 6.48043 10.1054 6.29289 10.2929C6.10536 10.4804 6 10.7348 6 11C6 11.2652 6.10536 11.5196 6.29289 11.7071C6.48043 11.8946 6.73478 12 7 12ZM25 15H7C6.73478 15 6.48043 15.1054 6.29289 15.2929C6.10536 15.4804 6 15.7348 6 16C6 16.2652 6.10536 16.5196 6.29289 16.7071C6.48043 16.8946 6.73478 17 7 17H25C25.2652 17 25.5196 16.8946 25.7071 16.7071C25.8946 16.5196 26 16.2652 26 16C26 15.7348 25.8946 15.4804 25.7071 15.2929C25.5196 15.1054 25.2652 15 25 15ZM25 20H7C6.73478 20 6.48043 20.1054 6.29289 20.2929C6.10536 20.4804 6 20.7348 6 21C6 21.2652 6.10536 21.5196 6.29289 21.7071C6.48043 21.8946 6.73478 22 7 22H25C25.2652 22 25.5196 21.8946 25.7071 21.7071C25.8946 21.5196 26 21.2652 26 21C26 20.7348 25.8946 20.4804 25.7071 20.2929C25.5196 20.1054 25.2652 20 25 20Z"
-                                fill="currentColor"></path>
-                        </svg>
-                    </button>
-                </div>
-                <div class="w-auto px-3">
-                    <a class="block max-w-max" href="#">
-                        <img src="flex-ui-assets/logos/dashboard/flex-ui-green.svg" alt=""
-                            data-config-id="auto-img-1-1">
-                    </a>
-                </div>
-            </div>
+    <x-sidemenu />
+    <main class="ease-soft-in-out xl:ml-68.5 relative h-full max-h-screen rounded-xl transition-all duration-200">
 
-            <x-side_menu />
+        <div class="lg:ml-80" data-bucket="1">
+            <header>
+                @yield('header')
+            </header>
 
-            <div class="lg:ml-80" data-bucket="1">
-                <header>
-                    @yield('header')
-                </header>
-
-                <main class="p-12">
-                    @yield('main')
-                </main>
-            </div>
+            <main
+                class="ease-soft-in-out xl:ml-68.5 relative h-full max-h-screen rounded-xl transition-all duration-200">
+                @yield('main')
+            </main>
+            <x-footer />
+        </div>
         </section>
-    </div>
+        </div>
 </body>
+<!-- plugin for charts  -->
+<script src="./assets/js/plugins/chartjs.min.js" async></script>
+<!-- plugin for scrollbar  -->
+<script src="./assets/js/plugins/perfect-scrollbar.min.js" async></script>
+<!-- github button -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<!-- main script file  -->
+<script src="./assets/js/soft-ui-dashboard-tailwind.js?v=1.0.5" async></script>
 
 </html>
