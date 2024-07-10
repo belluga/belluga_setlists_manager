@@ -25,17 +25,17 @@ class SideMenu extends Component
     {
         $dashboard = new stdClass();
         $dashboard->label = 'Dashboard';
-        $dashboard->icon = 'vaadin-dashboard';
+        $dashboard->icon = 'dashboard';
         $dashboard->route_string = 'home';
 
         $setlists = new stdClass();
         $setlists->label = 'Repertórios';
-        $setlists->icon = 'iconsax-bol-music-playlist';
+        $setlists->icon = 'setlists';
         $setlists->route_string = 'setlists';
 
         $musics = new stdClass();
         $musics->label = 'Músicas';
-        $musics->icon = 'gmdi-lyrics-s';
+        $musics->icon = 'lyrics';
         $musics->route_string = 'musics';
 
 
