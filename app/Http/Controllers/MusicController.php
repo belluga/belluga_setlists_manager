@@ -81,7 +81,13 @@ class MusicController extends Controller
      */
     public function show_shared_with_me(Music $music)
     {
-        $musics = Auth::user()->musics_shared_with_me;
+        $music_sharings = Auth::user()->musics_shared_with_me;
+
+        $musics = [];
+
+        foreach ($music_sharings as $sharing) {
+            $musics[] =  $sharing->object;
+        }
 
         return view('musics.musics_shared_with_me', [
             'musics' => $musics,
