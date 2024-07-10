@@ -18,7 +18,7 @@ Route::middleware('guest')->group(function () {
 
     Route::post('/login', [AuthController::class, 'login']);
 
-    Route::view('/index', 'index');
+    Route::view('/index', '/new/index')->name('dashboard');
 });
 
 Route::middleware('auth')->group(function () {
