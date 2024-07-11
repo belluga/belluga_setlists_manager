@@ -893,7 +893,7 @@ module.exports = {
       "4/6": "66.666667%",
       "5/6": "83.333333%",
       full: "100%",
-      sidenav: "calc(100vh - 370px)",
+      sidenav: "calc(100vh - 127px)",
       screen: "100vh",
       min: "min-content",
       max: "max-content",
