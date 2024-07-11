@@ -18,7 +18,7 @@ class AuthController extends Controller
         ]);
 
         $user = User::create($validated_fields);
-        Auth::login($user);
+        Auth::login($user, $request->remember);
 
         return redirect()->intended();
     }
