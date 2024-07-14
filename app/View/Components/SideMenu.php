@@ -31,7 +31,7 @@ class SideMenu extends Component
         $setlists = new stdClass();
         $setlists->label = 'Repertórios';
         $setlists->icon = 'setlists';
-        $setlists->route_string = 'setlists';
+        $setlists->route_string = 'setlists_my';
 
         $musics = new stdClass();
         $musics->label = 'Músicas';

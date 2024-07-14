@@ -2,7 +2,10 @@ const plugin = require("tailwindcss/plugin");
 
 module.exports = {
   mode: "jit",
-  content: ["./build/**/*.{html,js}"],
+  content: [
+    "./build/**/*.{html,js}",
+    "vendor/laravel/framework/src/Illuminate/Pagination/resources/views"
+  ],
   presets: [],
   darkMode: "class",
   theme: {

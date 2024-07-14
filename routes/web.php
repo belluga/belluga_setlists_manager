@@ -35,6 +35,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/setlist/{setlist}', [SetlistController::class, 'show_single']);
     Route::get('/setlists', [SetlistController::class, 'show_my'])->name('setlists');
+    Route::get('/setlists', [SetlistController::class, 'show_my'])->name('setlist_create');
+    Route::post('/setlists', [SetlistController::class, 'show_my']);
     Route::get('/setlists_my', [SetlistController::class, 'show_my'])->name('setlists_my');
     Route::get('/setlists_shared_with_me', [SetlistController::class, 'show_shared_with_me'])->name('setlists_shared');
 
