@@ -1,86 +1,62 @@
 @extends('layouts.main')
 
 @section('header')
-<x-navbar.main title="Adicionar Música" description="Descrição qualquer" buttonLabel="Repertório" />
+    <x-navbar.main title="Adicionar Música" description="Descrição qualquer" buttonLabel="Repertório" />
 @endsection
 
 @section('main')
     <form id="music_create" method="post" action="{{ route('music_create') }}">
         @csrf
-        <div class="py-6 border-b border-coolGray-100">
-            <div class="w-full md:w-9/12">
-                <div class="flex flex-wrap -m-3">
-                    <div class="w-full md:w-1/3 p-3">
-                        <p class="text-sm text-coolGray-800 font-semibold">Nome da Música</p>
-                    </div>
-                    <div class="w-full md:flex-1 p-3">
-                        <input name="name"
-                            class="w-full px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input"
-                            type="text" placeholder="Hey Jude">
-                        @error('name')
-                            <p>{{ $message }}</p>
-                        @enderror
-                    </div>
-                </div>
-            </div>
+        <label class="mb-2 ml-1 font-bold text-xs text-slate-700">Nome da Música</label>
+        <div class="mb-4">
+            <input name="name"
+                class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none"
+                type="text" placeholder="Hey Jude">
+            @error('name')
+                <p>{{ $message }}</p>
+            @enderror
+        </div>
+        <label class="mb-2 ml-1 font-bold text-xs text-slate-700">Intérprete</label>
+        <div class="mb-4">
+            <input name="interpreter"
+                class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none"
+                type="text" placeholder="The Beatles">
+            @error('name')
+                <p>{{ $message }}</p>
+            @enderror
+        </div>
+        <label class="mb-2 ml-1 font-bold text-xs text-slate-700">Tom</label>
+        <div class="mb-4">
+            <select placeholder="Selecione o tom" name="tone"
+                class="focus:shadow-soft-primary-outline text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none">
+                <option hidden disabled selected value>Selecione o tom</option>
+                <option>A</option>
+                <option>A#</option>
+                <option>B</option>
+                <option>C</option>
+                <option>C#</option>
+                <option>D</option>
+                <option>D#</option>
+                <option>E</option>
+                <option>F</option>
+                <option>F#</option>
+                <option>G</option>
+                <option>G#</option>
+            </select>
+            @error('tone')
+                <p>{{ $message }}</p>
+            @enderror
+        </div>
+        <label class="mb-2 ml-1 font-bold text-xs text-slate-700">Letra + Cifra</label>
+        <div class="mb-8">
+            @error('raw_content')
+                <p>{{ $message }}</p>
+            @enderror
+            <textarea rows=20 name="raw_content" placeholder="[A]Hey jude, [B]don't let"
+                class="focus:shadow-soft-primary-outline min-h-unset text-sm leading-5.6 ease-soft block h-auto w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none"></textarea>
+        </div>
+        <button type="submit"
+            class="inline-block w-full px-6 py-3 mt-6 mb-0 font-bold text-center text-white uppercase align-middle transition-all bg-transparent border-0 rounded-lg cursor-pointer shadow-soft-md bg-x-25 bg-150 leading-pro text-xs ease-soft-in tracking-tight-soft bg-gradient-to-tl from-blue-600 to-cyan-400 hover:scale-102 hover:shadow-soft-xs active:opacity-85">Salvar Música</button>
 
-        </div>
-        <div class="py-6 border-b border-coolGray-100">
-            <div class="w-full md:w-9/12">
-                <div class="flex flex-wrap -m-3">
-                    <div class="w-full md:w-1/3 p-3">
-                        <p class="text-sm text-coolGray-800 font-semibold">Tom</p>
-                    </div>
-                    <div class="w-full md:flex-1 p-3">
-                        <div class="relative">
-                            <svg class="absolute right-4 top-1/2 transform -translate-y-1/2" width="16" height="16"
-                                viewbox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M11.3333 6.1133C11.2084 5.98913 11.0395 5.91943 10.8633 5.91943C10.6872 5.91943 10.5182 5.98913 10.3933 6.1133L8.00001 8.47329L5.64001 6.1133C5.5151 5.98913 5.34613 5.91943 5.17001 5.91943C4.99388 5.91943 4.82491 5.98913 4.70001 6.1133C4.63752 6.17527 4.58792 6.249 4.55408 6.33024C4.52023 6.41148 4.50281 6.49862 4.50281 6.58663C4.50281 6.67464 4.52023 6.76177 4.55408 6.84301C4.58792 6.92425 4.63752 6.99799 4.70001 7.05996L7.52667 9.88663C7.58865 9.94911 7.66238 9.99871 7.74362 10.0326C7.82486 10.0664 7.912 10.0838 8.00001 10.0838C8.08801 10.0838 8.17515 10.0664 8.25639 10.0326C8.33763 9.99871 8.41136 9.94911 8.47334 9.88663L11.3333 7.05996C11.3958 6.99799 11.4454 6.92425 11.4793 6.84301C11.5131 6.76177 11.5305 6.67464 11.5305 6.58663C11.5305 6.49862 11.5131 6.41148 11.4793 6.33024C11.4454 6.249 11.3958 6.17527 11.3333 6.1133Z"
-                                    fill="#8896AB"></path>
-                            </svg>
-                            <select name="tone"
-                                class="appearance-none w-full py-2.5 px-4 text-coolGray-900 text-base font-normal bg-white border outline-none border-coolGray-200 focus:border-green-500 rounded-lg shadow-input">
-                                <option>Selecione o tom</option>
-                                <option>A</option>
-                                <option>A#</option>
-                                <option>B</option>
-                                <option>C</option>
-                                <option>C#</option>
-                                <option>D</option>
-                                <option>D#</option>
-                                <option>E</option>
-                                <option>F</option>
-                                <option>F#</option>
-                                <option>G</option>
-                                <option>G#</option>
-                            </select>
-                            @error('tone')
-                                <p>{{ $message }}</p>
-                            @enderror
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="pt-6">
-            <div class="w-full md:w-9/12">
-                <div class="flex flex-wrap -m-3">
-                    <div class="w-full md:w-1/3 p-3">
-                        <p class="text-sm text-coolGray-800 font-semibold">Letra + Cifra</p>
-                        <p class="text-xs text-coolGray-500 font-medium">Insira a cifra com [D] onde quer que seja exibida.
-                        </p>
-                    </div>
-                    <div class="w-full md:flex-1 p-3">
-                        @error('raw_content')
-                            <p>{{ $message }}</p>
-                        @enderror
-                        <textarea name="raw_content" placeholder="[A]Hey jude, [B]don't let"
-                            class="block w-full h-64 p-6 text-base text-coolGray-900 font-normal outline-none focus:border-green-500 border border-coolGray-200 rounded-lg shadow-input resize-none"></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </div>
     </form>
 @endsection

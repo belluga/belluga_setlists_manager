@@ -1,10 +1,8 @@
 @extends('layouts.main')
 
 @section('header')
-    <x-main.page_header title="{{ $music->name }}" description="Tom: {{ $music->tone }}" buttonLabel="Salvar"
-        buttonRoute="music_create">
-        <x-main.add_button label="Salvar Música" type="submit" form="music_create" />
-    </x-main.page_header>
+    {{-- <x-main.page_header title="Dashboard" description="Descrição qualquer" buttonLabel="Repertório" /> --}}
+    <x-navbar.main title="{{$music->name}}" description="Descrição qualquer" buttonLabel="Repertório" />
 @endsection
 
 @section('main')

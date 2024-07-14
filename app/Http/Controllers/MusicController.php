@@ -35,6 +35,7 @@ class MusicController extends Controller
         $validated_data = $request->validate(
             [
                 "name" => ["required", "min:2", "max:255"],
+                "interpreter" => ["min:2", "max:255"],
                 "tone" => ["required", Rule::in(["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"])],
                 "raw_content" => ["required", "min:10"],
             ]
