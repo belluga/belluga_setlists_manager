@@ -1,4 +1,5 @@
 import './bootstrap';
+import ChordSheetJS from 'chordsheetjs';
 // import '../css/argon-dashboard/nucleo-icons.css'
 // import '../css/argon-dashboard/nucleo-svg.css'
 // import '../css/argon-dashboard/perfect-scrollbar.css'
