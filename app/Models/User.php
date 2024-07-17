@@ -2,13 +2,11 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-
-use App\Models\Sharing\ShareObject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use MongoDB\Laravel\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -36,15 +34,19 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    public function musics(): HasMany
+    public function musics(): BelongsToMany
     {
-        return $this->hasMany(Music::class, "owner");
+        return $this->belongsToMany(Music::class);
     }
 
-
-    public function musics_shared_with_me(): HasMany
+    public function setlists(): BelongsToMany
     {
-        return $this->hasMany(ShareObject::class, "shared_with");
+        return $this->belongsToMany(Setlist::class);
+    }
+
+    public function artists(): BelongsTo
+    {
+        return $this->belongsTo(Artist::class);
     }
 
     protected function casts(): array

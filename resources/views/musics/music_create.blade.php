@@ -49,10 +49,10 @@
         </div>
         <label class="mb-2 ml-1 font-bold text-xs text-slate-700">Letra + Cifra</label>
         <div class="mb-8">
-            @error('raw_content')
+            @error('lyrics')
                 <p>{{ $message }}</p>
             @enderror
-            <textarea rows=20 name="raw_content" placeholder="[A]Hey jude, [B]don't let"
+            <textarea rows=20 name="lyrics" placeholder="[A]Hey jude, [B]don't let"
                 class="focus:shadow-soft-primary-outline min-h-unset text-sm leading-5.6 ease-soft block h-auto w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none"></textarea>
         </div>
         <button type="submit"

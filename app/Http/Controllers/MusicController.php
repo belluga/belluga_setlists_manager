@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Genre;
 use App\Models\Music;
-use App\Models\MusicGenre;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -35,9 +34,8 @@ class MusicController extends Controller
         $validated_data = $request->validate(
             [
                 "name" => ["required", "min:2", "max:255"],
-                "interpreter" => ["min:2", "max:255"],
                 "tone" => ["required", Rule::in(["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"])],
-                "raw_content" => ["required", "min:10"],
+                "lyrics" => ["required", "min:10"],
             ]
         );
 
@@ -45,11 +43,11 @@ class MusicController extends Controller
             ['owner' => Auth::id(), ...$validated_data]
         );
 
-        $genre = new MusicGenre();
-        $genre->name = "Rock Alternativo";
-        $genre->parent = "Rock";
+        // $genre = new Genre();
+        // $genre->name = "Rock Alternativo";
+        // $genre->parent = "Rock";
 
-        $music->genres()->attach($genre);
+        // $music->genres()->attach($genre);
 
         return redirect()->route('music.show', ['music' => $music]);
     }
@@ -80,7 +78,7 @@ class MusicController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show_shared_with_me(Music $music)
+    public function showSharedWithMe(Music $music)
     {
         $music_sharings = Auth::user()->musics_shared_with_me;
 

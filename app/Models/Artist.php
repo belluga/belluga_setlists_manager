@@ -3,36 +3,30 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
-class Setlist extends Model
+class Artist extends Model
 {
 
     use HasSlug;
 
     protected $fillable = [
         "name",
-        "description",
-        "shared_with",
-        "owner"
+        "slug",
+        "avatar_url",
+        "bio",
+        "birth",
+        "death",
+        "country",
+        "state",
+        "city",
     ];
 
     public function owner(): HasOne
     {
-        return $this->hasOne(User::class, "owner");
-    }
-
-    public function sharedWith(): BelongsToMany
-    {
-        return $this->belongsToMany(User::class);
-    }
-
-    public function musics(): BelongsToMany
-    {
-        return $this->belongsToMany(Music::class);
+        return $this->hasOne(User::class);
     }
 
     public function getSlugOptions(): SlugOptions
