@@ -4,9 +4,9 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-use App\Models\Sharing\SharingMusic;
+use App\Models\Sharing\ShareObject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use MongoDB\Laravel\Auth\User as Authenticatable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use MongoDB\Laravel\Relations\HasMany;
 
@@ -44,7 +44,7 @@ class User extends Authenticatable
 
     public function musics_shared_with_me(): HasMany
     {
-        return $this->hasMany(SharingMusic::class, "shared_with");
+        return $this->hasMany(ShareObject::class, "shared_with");
     }
 
     protected function casts(): array

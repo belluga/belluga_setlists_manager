@@ -2,16 +2,13 @@
 
 namespace App\Models;
 
-use MongoDB\Laravel\Eloquent\Model;
-use MongoDB\Laravel\Relations\BelongsTo;
-use MongoDB\Laravel\Relations\BelongsToMany;
+use App\Models\Sharing\ShareObject;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Setlist extends Model
 {
-
-    protected $connection = "mongodb";
-
-    protected $collection = "setlists";
 
     protected $fillable = [
         "name",
@@ -25,8 +22,8 @@ class Setlist extends Model
         return $this->belongsTo(User::class, "owner");
     }
 
-    public function sharedWith(): BelongsToMany
+    public function sharedWith(): HasMany
     {
-        return $this->belongsToMany(User::class, "shared_with");
+        return $this->hasMany(ShareObject::class, "object_id");
     }
 }

@@ -2,18 +2,13 @@
 
 namespace App\Models;
 
-use App\Models\Sharing\SharingMusic;
+use App\Models\Sharing\ShareObject;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use MongoDB\Laravel\Eloquent\Model;
-use MongoDB\Laravel\Relations\BelongsTo;
-use MongoDB\Laravel\Relations\EmbedsMany;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Music extends Model
 {
-
-    protected $connection = "mongodb";
-
-    protected $collection = "musics";
 
     protected $fillable = [
         "name",
@@ -33,10 +28,10 @@ class Music extends Model
 
     public function sharedWith(): HasMany
     {
-        return $this->hasMany(SharingMusic::class, "music");
+        return $this->hasMany(ShareObject::class, "object_id");
     }
 
-    public function genres(): EmbedsMany
+    public function genres(): HasMany
     {
         return $this->embedsMany(MusicGenre::class);
     }

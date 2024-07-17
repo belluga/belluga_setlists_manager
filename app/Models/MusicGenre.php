@@ -2,12 +2,10 @@
 
 namespace App\Models;
 
-use MongoDB\Laravel\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model;
 
 class MusicGenre extends Model
 {
-    protected $connection = 'mongodb';
-
     protected $fillable = [
         "parent",
         "name",

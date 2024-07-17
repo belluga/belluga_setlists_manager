@@ -6,11 +6,18 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use MongoDB\Laravel\Eloquent\Model;
 
-abstract class Sharing extends Model
+abstract class ShareObject extends Model
 {
     protected $connection = 'mongodb';
 
     protected $collection = 'share_relation';
+
+    protected $fillable = [
+        "object_type",
+        "object_id",
+        "shared_with",
+        "permissions",
+    ];
 
     public function owner(): BelongsTo
     {
