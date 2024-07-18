@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MusicController;
 use App\Http\Controllers\SetlistController;
 use Illuminate\Support\Facades\Route;
+use Stancl\Tenancy\Features\UserImpersonation;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 
@@ -26,6 +27,12 @@ Route::middleware([
     InitializeTenancyByDomain::class,
     PreventAccessFromCentralDomains::class,
 ])->group(function () {
+
+    Route::get('/impersonate/{token}', function ($token) {
+        return UserImpersonation::makeResponse($token);
+    });
+
+
     Route::middleware('guest')->group(function () {
         Route::get('/register', function () {
             return view('auth.register');
