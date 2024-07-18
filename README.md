@@ -1,105 +1,66 @@
-<p align="center"><a href="https://devdojo.com/wave" target="_blank"><img src="https://cdn.devdojo.com/images/september2023/wave-logo.png" width="200"></a></p>
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center"><a href="https://www.producthunt.com/posts/wave-2-0" target="_blank"><img src="https://cdn.devdojo.com/images/april2021/upvote-product-hunt-img.png" height="auto" width="auto"></a></p>
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-## Introduction
+## About Laravel
 
-[Wave](https://devdojo.com/wave) is a Software as a Service Starter Kit that can help you build your next great idea 💰. Wave is built with [Laravel](https://laravel.com), [Voyager](https://voyager.devdojo.com), [TailwindCSS](https://tailwindcss.com), and a few other awesome technologies. Here are some of the awesome features ✨:
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
- - [Authentication](https://wave.devdojo.com/docs/features/authentication)
- - [User Profiles](https://wave.devdojo.com/docs/features/user-profiles)
- - [User Impersonation](https://wave.devdojo.com/docs/features/user-impersonation)
- - [Subscriptions](https://wave.devdojo.com/docs/features/billing)
- - [Subscription Plans](https://wave.devdojo.com/docs/features/subscription-plans)
- - [User Roles](https://wave.devdojo.com/docs/features/user-roles)
- - [Notifications](https://wave.devdojo.com/docs/features/notifications)
- - [Announcements](https://wave.devdojo.com/docs/features/announcements)
- - [Fully Functional Blog](https://wave.devdojo.com/docs/features/blog)
- - [Out of the Box API](https://wave.devdojo.com/docs/features/api)
- - [Voyager Admin](https://wave.devdojo.com/docs/features/admin)
- - [Customizable Themes](https://wave.devdojo.com/docs/features/themes)
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Demo
-View a live [demo here](https://wave.devdojo.com), or deploy your own instance to DigitalOcean, by clicking the button below.
+## Learning Laravel
 
-<a href="https://cloud.digitalocean.com/apps/new?repo=https://github.com/thedevdojo/wave/tree/main" target="_blank"><img src="https://www.deploytodo.com/do-btn-blue.svg" width="240" alt="Deploy to DO"></a>
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-## Installation
+You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-Wave runs on **PHP 8.1** and **Laravel 10.x**.
+If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-To install Wave, you'll want to clone or download this repo:
+## Laravel Sponsors
 
-```
-git clone https://github.com/thedevdojo/wave.git project_name
-```
+We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-Next, we can install Wave with these **4 simple steps**:
+### Premium Partners
 
-### 1. Create a New Database
+- **[Vehikl](https://vehikl.com/)**
+- **[Tighten Co.](https://tighten.co)**
+- **[WebReinvent](https://webreinvent.com/)**
+- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+- **[64 Robots](https://64robots.com)**
+- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
+- **[Cyber-Duck](https://cyber-duck.co.uk)**
+- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
+- **[Jump24](https://jump24.co.uk)**
+- **[Redberry](https://redberry.international/laravel/)**
+- **[Active Logic](https://activelogic.com)**
+- **[byte5](https://byte5.de)**
+- **[OP.GG](https://op.gg)**
 
-We'll need to utilize a MySQL database during the installation. For the following stage, you'll need to create a new database and preserve the credentials.
+## Contributing
 
-```sql
-CREATE DATABASE wave;
-CREATE USER 'wave'@'localhost' IDENTIFIED BY 'wave_password';
-GRANT ALL PRIVILEGES ON wave.* TO 'wave'@'localhost';
-```
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-### 2. Copy the `.env.example` file
+## Code of Conduct
 
-We need to specify our Environment variables for our application. You will see a file named `.env.example`, you will need to duplicate that file and rename it to `.env`.
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-Then, open up the `.env` file and update your *DB_DATABASE*, *DB_USERNAME*, and *DB_PASSWORD* in the appropriate fields. You will also want to update the *APP_URL* to the URL of your application.
+## Security Vulnerabilities
 
-```bash
-APP_URL=http://wave.test
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=wave
-DB_USERNAME=root
-DB_PASSWORD=
-```
+## License
 
-
-### 3. Add Composer Dependencies
-
-First, you should ensure that your web server has the required PHP extensions installed:
-
-> [Laravel PHP Requirements](https://laravel.com/docs/9.x/deployment#server-requirements)
-
-Following that, we'll need to install all composer dependencies through the following command:
-```php
-composer install
-```
-
-### 4. Run Migrations and Seeds
-
-We must migrate our database schema into our database, which we can accomplish by running the following command:
-```php
-php artisan migrate
-```
-<br>
-Finally, we will need to seed our database with the following command:
-
-```php
-php artisan db:seed
-```
-<br>
-
-🎉 And that's it! You will now be able to visit your URL and see your Wave application up and running.
-
-
-## Watch, Learn, and Build
-
-We've also got a full video series on how you can setup, build, and configure Wave. 🍿 You can watch first few videos for free, and additional videos will require a [DevDojo Pro](https://devdojo.com/pro) subscription. By subscribing to a [DevDojo Pro](https://devdojo.com/pro) subscription you will also be supporting the ongoing development of this project. It's a win win! 🙌
-
-[Click here to watch the Wave Video Series](https://devdojo.com/course/wave).
-
-
-## Documentation
-
-Checkout the [official documentation here](https://wave.devdojo.com/docs).
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
