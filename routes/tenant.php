@@ -7,6 +7,7 @@ use App\Http\Controllers\MusicController;
 use App\Http\Controllers\SetlistController;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Features\UserImpersonation;
+use Stancl\Tenancy\Middleware\CheckTenantForMaintenanceMode;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomainOrSubdomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 
@@ -26,6 +27,7 @@ Route::middleware([
     'web',
     InitializeTenancyByDomainOrSubdomain::class,
     PreventAccessFromCentralDomains::class,
+    CheckTenantForMaintenanceMode::class,
 ])->group(function () {
 
     Route::get('/impersonate/{token}', function ($token) {
