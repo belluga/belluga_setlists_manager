@@ -34,6 +34,11 @@ class PlatformProvider extends OrchidServiceProvider
     public function menu(): array
     {
         return [
+            Menu::make('Minhas Músicas')
+                ->icon('bs.book')
+                ->title('Músicas')
+                ->route('platform.music'),
+
             Menu::make('Get Started')
                 ->icon('bs.book')
                 ->title('Navigation')

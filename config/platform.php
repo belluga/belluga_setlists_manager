@@ -47,7 +47,7 @@ return [
      */
 
     'middleware' => [
-        'public'  => ['web', 'universal', InitializeTenancyByDomainOrSubdomain::class], // Don't forget to import the middleware
+        'public'  => ['web', 'universal', InitializeTenancyByDomainOrSubdomain::class],
         'private' => ['web', 'platform', 'universal', InitializeTenancyByDomainOrSubdomain::class],
     ],
 
@@ -86,7 +86,7 @@ return [
      |
      */
 
-    'auth' => true,
+    'auth' => false,
 
     /*
      |--------------------------------------------------------------------------

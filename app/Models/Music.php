@@ -3,14 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Orchid\Attachment\Attachable;
+use Orchid\Filters\Filterable;
+use Orchid\Screen\AsSource;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
 class Music extends Model
 {
-    use HasSlug;
+    use HasSlug, AsSource, Filterable, Attachable;
 
     protected $table = "musics";
 
@@ -24,9 +27,9 @@ class Music extends Model
         "owner"
     ];
 
-    public function owner(): HasOne
+    public function owner(): BelongsTo
     {
-        return $this->hasOne(User::class, "owner");
+        return $this->belongsTo(User::class, "owner");
     }
 
     public function musics(): BelongsToMany

@@ -5,11 +5,15 @@ declare(strict_types=1);
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MusicController;
 use App\Http\Controllers\SetlistController;
+use App\Orchid\Screens\MusicScreen;
+use App\Orchid\Screens\PlatformScreen;
+use App\Orchid\Screens\User\UserProfileScreen;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Features\UserImpersonation;
 use Stancl\Tenancy\Middleware\CheckTenantForMaintenanceMode;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomainOrSubdomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
+use Tabuna\Breadcrumbs\Trail;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +29,7 @@ use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 
 Route::middleware([
     'web',
-    'platform',
+    // 'platform',
     InitializeTenancyByDomainOrSubdomain::class,
     PreventAccessFromCentralDomains::class,
     CheckTenantForMaintenanceMode::class,
@@ -33,6 +37,29 @@ Route::middleware([
 
     Route::get('/impersonate/{token}', function ($token) {
         return UserImpersonation::makeResponse($token);
+    });
+
+    Route::middleware('platform')->group(function () {
+        Route::screen('/admin', PlatformScreen::class)
+            ->name('platform.index')
+            ->breadcrumbs(function (Trail $trail) {
+                return $trail->push(__('Home'), route('platform.index'));
+            });
+
+        Route::screen('/admin/main', PlatformScreen::class)
+            ->name('platform.main');
+
+        Route::screen('/admin/profile', UserProfileScreen::class)
+            ->name('platform.profile')
+            ->breadcrumbs(fn (Trail $trail) => $trail
+                ->parent('platform.index')
+                ->push(__('Profile'), route('platform.profile')));
+
+        Route::screen('/admin/music', MusicScreen::class)
+            ->name('platform.music')
+            ->breadcrumbs(fn (Trail $trail) => $trail
+                ->parent('platform.index')
+                ->push(__('Profile'), route('platform.profile')));
     });
 
 
@@ -49,7 +76,9 @@ Route::middleware([
 
         Route::post('/login', [AuthController::class, 'login']);
 
-        Route::view('/index', '/new/index')->name('dashboard');
+
+
+        // Route::view('/index', '/new/index')->name('dashboard');
     });
 
     Route::middleware('auth')->group(function () {

@@ -31,22 +31,22 @@ use Tabuna\Breadcrumbs\Trail;
 |
 */
 
-Route::screen('/', PlatformScreen::class)
-    ->name('platform.index')
-    ->breadcrumbs(function (Trail $trail) {
-        return $trail->push(__('Home'), route('platform.index'));
-    });
+// Route::screen('/', PlatformScreen::class)
+//     ->name('platform.index')
+//     ->breadcrumbs(function (Trail $trail) {
+//         return $trail->push(__('Home'), route('platform.index'));
+//     });
 
 // Main
-Route::screen('/main', PlatformScreen::class)
-    ->name('platform.main');
+// Route::screen('/main', PlatformScreen::class)
+//     ->name('platform.main');
 
 // Platform > Profile
-Route::screen('profile', UserProfileScreen::class)
-    ->name('platform.profile')
-    ->breadcrumbs(fn (Trail $trail) => $trail
-        ->parent('platform.index')
-        ->push(__('Profile'), route('platform.profile')));
+// Route::screen('profile', UserProfileScreen::class)
+//     ->name('platform.profile')
+//     ->breadcrumbs(fn (Trail $trail) => $trail
+//         ->parent('platform.index')
+//         ->push(__('Profile'), route('platform.profile')));
 
 // Platform > System > Users > User
 Route::screen('users/{user}/edit', UserEditScreen::class)
