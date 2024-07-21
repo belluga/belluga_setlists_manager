@@ -3,6 +3,7 @@
 namespace App\Orchid\Layouts\Music;
 
 use App\Models\Music;
+use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
@@ -30,12 +31,22 @@ class MusicListLayout extends Table
             TD::make('name', 'Nome')
                 ->render(function (Music $music) {
                     return Link::make($music->name)
-                        ->route('platform.music.edit', $music);
+                        ->route('platform.music.edit', ['music' => $music]);
                 }),
 
             TD::make('tone', 'Tom'),
             TD::make('created_at', 'Created'),
             TD::make('updated_at', 'Last edit'),
+            TD::make('Actions')
+                ->alignRight()
+                ->render(function (Music $music) {
+                    return Button::make('Apagar')
+                        ->confirm('Tem certeza? Depois de apagar não será possível recuperar sua música.')
+                        ->action(route('platform.music.edit', [
+                            'method' => 'delete',
+                            'music' => $music
+                        ]));
+                }),
         ];
     }
 }

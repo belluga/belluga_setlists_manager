@@ -43,9 +43,11 @@ class MusicEditScreen extends Screen
      *
      * @return array
      */
-    public function query(): iterable
+    public function query(Music $music): iterable
     {
-        return [];
+        return [
+            'music' => $music
+        ];
     }
 
     /**
@@ -91,16 +93,49 @@ class MusicEditScreen extends Screen
     public function layout(): iterable
     {
         return [
+            Layout::modal(
+                'artistAddModal',
+                Layout::rows([
+                    Input::make('name')
+                        ->title('Nome')
+                        ->placeholder('Bob Marley'),
+                    Quill::make('bio')
+                        ->title('Sobre o artista')
+                        ->toolbar(['text', 'format', 'media'])
+                        ->placeholder('Conte um pouco da história do artista'),
+                ]),
+            )
+                ->title('Adicionar artista')
+                ->applyButton('Adicionar')
+                ->closeButton('Cancelar'),
+
+            Layout::modal(
+                'genreAddModal',
+                Layout::rows([
+                    Input::make('name')
+                        ->title('Nome')
+                        ->placeholder('Rock\'n\'Roll'),
+                    Relation::make('parent')
+                        ->title('Gênero Pai')
+                        ->fromModel(Genre::class, 'name'),
+                ]),
+            )
+                ->title('Adicionar gênero')
+                ->applyButton('Adicionar')
+                ->closeButton('Cancelar'),
+
             Layout::split(
                 [
                     Layout::rows(
                         [
                             Input::make('name')
                                 ->title('Nome')
+                                ->value($this->music?->name)
                                 ->placeholder('Hey Jude')->required(),
 
                             RadioButtons::make('tone')
                                 ->title('Tom')
+                                ->value($this->music?->tone)
                                 ->options([
                                     'C' => 'C',
                                     'Db' => 'Db',
@@ -118,35 +153,43 @@ class MusicEditScreen extends Screen
 
                             TextArea::make('lyrics')
                                 ->rows(10)
+                                ->value($this->music?->lyrics)
                                 ->title('Letra + Cifra')->required(),
                         ]
                     ),
                     Layout::rows(
                         [
 
-                            Relation::make('genres')
+                            Relation::make('genres.')
                                 ->title('Gêneros')
                                 ->multiple()
+                                ->searchColumns('name')
+                                ->value($this->music?->genres)
                                 ->fromModel(Genre::class, 'name'),
 
-                            Relation::make('composer')
+                            ModalToggle::make('Adicionar Gênero')
+                                ->modal('genreAddModal')
+                                ->method('addGenre')
+                                ->icon('plus'),
+
+                            Relation::make('composer.')
                                 ->title('Compositores')
                                 ->multiple()
+                                ->searchColumns('name')
+                                ->value($this->music?->composer)
                                 ->fromModel(Artist::class, 'name'),
 
-                            Relation::make('interpreter')
+                            Relation::make('interpreter.')
                                 ->title('Intérpretes')
                                 ->multiple()
+                                ->searchColumns('name')
+                                ->value($this->music?->interpreter)
                                 ->fromModel(Artist::class, 'name'),
-                            // Relation::make('genres')
-                            //     ->title('Gênero')
-                            //     ->multiple()
-                            //     ->searchColumns('name')
-                            //     ->chunk(20)
-                            //     ->fromModel(Genre::class, 'name'),
 
-                            // Button::make('+ genre')->method('buttonClickProcessing')->type(Color::SECONDARY),
-
+                            ModalToggle::make('Adicionar Artista')
+                                ->modal('artistAddModal')
+                                ->method('addArtist')
+                                ->icon('plus'),
                         ]
                     ),
 
@@ -162,10 +205,10 @@ class MusicEditScreen extends Screen
      */
     public function createOrUpdate(Request $request)
     {
-        if ($this->music == null) {
-            $this->_create($request);
-        } else {
+        if ($this->music?->id == true) {
             $this->music->fill($request->get('music'))->save();
+        } else {
+            $this->_create($request);
         }
 
         Alert::info('Música adicionada com sucesso.');
@@ -195,9 +238,40 @@ class MusicEditScreen extends Screen
             ]
         );
 
-        return Music::create(
+
+
+        $this->music = Music::create(
             ['owner' => Auth::id(), ...$validated_data]
         );
+
+        $_genres = is_array($request->genres) ? $request->genres : $request->genres;
+
+        if ($_genres != null) {
+            // dd([
+            //     '$_genres' => $_genres,
+            //     '$this->music' => $this->music,
+            //     '$this->music->genres' => $this->music->genres(),
+            //     'find' => Music::find($this->music->id),
+            // ]);
+            $this->music->genres()->sync($_genres);
+        }
+
+
+        // if (is_array($request->composer)) {
+        //     foreach ($request->composer as $composer) {
+        //         $artist = Artist::find($composer);
+        //         if ($artist != null) {
+        //             $this->music->composer->attach($artist);
+        //         }
+        //     }
+        // }
+
+        // if (is_array($request->interpreter)) {
+        //     foreach ($request->interpreter as $interpreter) {
+        //         dd($interpreter);
+        //         $music->interpreter->attach($interpreter);
+        //     }
+        // }
     }
 
     /**
@@ -210,5 +284,39 @@ class MusicEditScreen extends Screen
         Alert::info('Música removida com sucesso.');
 
         return redirect()->route('platform.music.list');
+    }
+
+    /**
+     * @param Illuminate\Http\Request
+     * 
+     * @return void
+     */
+    public function addArtist(Request $request)
+    {
+
+        $request_valdated = $request->validate(
+            [
+                'name' => ["required", 'min:2', 'max:255']
+            ]
+        );
+
+        Artist::create(['creator_id' => Auth::id(), ...$request_valdated]);
+    }
+
+    public function addGenre(Request $request)
+    {
+
+        $request_valdated = $request->validate(
+            [
+                'name' => ["required", 'min:2', 'max:255']
+            ]
+        );
+
+        Genre::create(['creator_id' => Auth::id(), ...$request_valdated]);
+    }
+
+    public function delete(Music $music)
+    {
+        $music->delete();
     }
 }

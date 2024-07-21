@@ -23,6 +23,7 @@ class Artist extends Model
         "country",
         "state",
         "city",
+        "creator_id"
     ];
 
     public function owner(): HasOne

@@ -57,7 +57,7 @@ Route::middleware([
                 ->parent('platform.index')
                 ->push(__('Profile'), route('platform.profile')));
 
-        Route::screen('/admin/music/{post?}', MusicEditScreen::class)
+        Route::screen('/admin/music/{music?}', MusicEditScreen::class)
             ->name('platform.music.edit');
 
         Route::screen('/admin/musics', MusicListScreen::class)

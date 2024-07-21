@@ -40,7 +40,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
-            $table->foreignIdFor(Genre::class, 'parent_id');
+            $table->foreignIdFor(Genre::class, 'parent_id')->nullable();
             $table->foreignIdFor(User::class, 'creator_id');
             $table->timestamps();
         });

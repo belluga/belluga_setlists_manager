@@ -16,6 +16,7 @@ class Genre extends Model
     protected $fillable = [
         "parent",
         "name",
+        "creator_id",
     ];
 
     public function musics(): BelongsToMany
