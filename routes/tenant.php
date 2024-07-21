@@ -5,6 +5,8 @@ declare(strict_types=1);
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MusicController;
 use App\Http\Controllers\SetlistController;
+use App\Orchid\Screens\MusicEditScreen;
+use App\Orchid\Screens\MusicListScreen;
 use App\Orchid\Screens\MusicScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
@@ -55,11 +57,11 @@ Route::middleware([
                 ->parent('platform.index')
                 ->push(__('Profile'), route('platform.profile')));
 
-        Route::screen('/admin/music', MusicScreen::class)
-            ->name('platform.music')
-            ->breadcrumbs(fn (Trail $trail) => $trail
-                ->parent('platform.index')
-                ->push(__('Profile'), route('platform.profile')));
+        Route::screen('/admin/music/{post?}', MusicEditScreen::class)
+            ->name('platform.music.edit');
+
+        Route::screen('/admin/musics', MusicListScreen::class)
+            ->name('platform.music.list');
     });
 
 

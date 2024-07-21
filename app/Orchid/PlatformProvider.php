@@ -37,7 +37,7 @@ class PlatformProvider extends OrchidServiceProvider
             Menu::make('Minhas Músicas')
                 ->icon('bs.book')
                 ->title('Músicas')
-                ->route('platform.music'),
+                ->route('platform.music.list'),
 
             Menu::make('Get Started')
                 ->icon('bs.book')

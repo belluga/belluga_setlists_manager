@@ -3,7 +3,6 @@
 namespace App\Orchid\Screens;
 
 use App\Models\Music;
-use App\Models\User;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\Input;
 use Orchid\Support\Facades\Layout;

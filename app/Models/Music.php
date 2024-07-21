@@ -22,6 +22,7 @@ class Music extends Model
         "tone",
         "composer",
         "interpreter",
+        "genres",
         "play_settings",
         "lyrics",
         "owner"
