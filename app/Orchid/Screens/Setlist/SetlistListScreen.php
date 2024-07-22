@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Orchid\Screens;
+namespace App\Orchid\Screens\Setlist;
 
 use Illuminate\Support\Facades\Auth;
 use Orchid\Screen\Actions\Link;
@@ -8,7 +8,7 @@ use Orchid\Screen\Screen;
 
 use App\Orchid\Layouts\Music\MusicListLayout;
 
-class MusicListScreen extends Screen
+class SetlistListScreen extends Screen
 {
     /**
      * Fetch data to be displayed on the screen.
@@ -18,7 +18,7 @@ class MusicListScreen extends Screen
     public function query(): iterable
     {
         return [
-            'musics' => Auth::user()->musics,
+            'setlists' => Auth::user()->setlists,
         ];
     }
 
@@ -29,7 +29,7 @@ class MusicListScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'Minhas músicas';
+        return __('Meus repertórios');
     }
 
     /**
@@ -40,9 +40,9 @@ class MusicListScreen extends Screen
     public function commandBar(): iterable
     {
         return [
-            Link::make('Adicionar nova')
+            Link::make('Adicionar novo')
                 ->icon('pencil')
-                ->route('platform.music.edit')
+                ->route('platform.setlist.edit')
         ];
     }
 

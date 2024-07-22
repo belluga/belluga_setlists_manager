@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Orchid\Screens;
+namespace App\Orchid\Screens\Music;
 
 use App\Models\Artist;
 use App\Models\Genre;
@@ -12,7 +12,6 @@ use Orchid\Screen\Fields\Quill;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
-use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\RadioButtons;
 use Orchid\Screen\Fields\Relation;
 use Orchid\Screen\Fields\TextArea;
@@ -54,7 +53,7 @@ class MusicEditScreen extends Screen
      */
     public function name(): ?string
     {
-        return $this->music?->exists == true ? 'Alterar música' : 'Adicionar nova música';
+        return $this->music?->exists == true ? $this->music->name : __('Adicionar nova música');
     }
 
     /**
@@ -65,13 +64,13 @@ class MusicEditScreen extends Screen
     public function commandBar(): iterable
     {
         return [
-            Button::make('Adicionar música')
+            Button::make(__('Adicionar música'))
                 ->icon('pencil')
                 ->method('createOrUpdate')
                 ->canSee(!$this->_musicExists()),
 
-            Button::make('Alterar')
-                ->icon('note')
+            Button::make('Salvar')
+                ->icon('save')
                 ->method('createOrUpdate')
                 ->canSee($this->_musicExists()),
 

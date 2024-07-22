@@ -5,9 +5,9 @@ declare(strict_types=1);
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MusicController;
 use App\Http\Controllers\SetlistController;
-use App\Orchid\Screens\MusicEditScreen;
-use App\Orchid\Screens\MusicListScreen;
-use App\Orchid\Screens\MusicScreen;
+use App\Orchid\Screens\Music\MusicEditScreen;
+use App\Orchid\Screens\Music\MusicListScreen;
+use App\Orchid\Screens\Setlist\SetlistListScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
 use Illuminate\Support\Facades\Route;
@@ -58,10 +58,24 @@ Route::middleware([
                 ->push(__('Profile'), route('platform.profile')));
 
         Route::screen('/admin/music/{music?}', MusicEditScreen::class)
-            ->name('platform.music.edit');
+            ->name('platform.music.edit')
+            ->breadcrumbs(fn (Trail $trail) => $trail
+                ->parent('platform.index')
+                ->push(__('Minhas Músicas'), route('platform.music.list'))
+                ->push(__('{music}'), route('platform.music.edit')));
 
         Route::screen('/admin/musics', MusicListScreen::class)
             ->name('platform.music.list');
+
+        Route::screen('/admin/setlist/{setlist?}', SetlistListScreen::class)
+            ->name('platform.setlist.edit')
+            ->breadcrumbs(fn (Trail $trail) => $trail
+                ->parent('platform.index')
+                ->push(__('Meus Repertórios'), route('platform.setlist.list'))
+                ->push(__('{music}'), route('platform.setlist.edit')));
+
+        Route::screen('/admin/setlists', SetlistListScreen::class)
+            ->name('platform.setlist.list');
     });
 
 

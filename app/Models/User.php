@@ -39,6 +39,11 @@ class User extends Authenticatable implements UserInterface
         return $this->hasMany(Music::class, 'owner');
     }
 
+    public function setlists(): HasMany
+    {
+        return $this->hasMany(Setlist::class, 'owner');
+    }
+
     /**
      * The attributes excluded from the model's JSON form.
      *
