@@ -5,6 +5,7 @@ namespace App\Orchid\Screens;
 use App\Models\Artist;
 use App\Models\Genre;
 use App\Models\Music;
+use App\Orchid\Screens\Fields\RelationWithModal;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Quill;
@@ -155,37 +156,38 @@ class MusicEditScreen extends Screen
                     ),
                     Layout::rows(
                         [
-
-                            Relation::make('genres.')
+                            RelationWithModal::make('genres.')
                                 ->title('Gêneros')
                                 ->multiple()
+                                ->modalTarget('genreAddModal')
+                                ->modalMethod('addGenre')
+                                ->toggleIcon('plus')
+                                ->toggleLabel(__('Gênero'))
                                 ->searchColumns('name')
                                 ->value($this->music?->genres)
                                 ->fromModel(Genre::class, 'name'),
 
-                            ModalToggle::make('Adicionar Gênero')
-                                ->modal('genreAddModal')
-                                ->method('addGenre')
-                                ->icon('plus'),
-
-                            Relation::make('composers.')
+                            RelationWithModal::make('composers.')
                                 ->title('Compositores')
                                 ->multiple()
+                                ->modalTarget('artistAddModal')
+                                ->modalMethod('addArtist')
+                                ->toggleIcon('plus')
+                                ->toggleLabel(__("Artista"))
                                 ->searchColumns('name')
                                 ->value($this->music?->composers)
                                 ->fromModel(Artist::class, 'name'),
 
-                            Relation::make('interpreters.')
+                            RelationWithModal::make('interpreters.')
                                 ->title('Intérpretes')
                                 ->multiple()
+                                ->modalTarget('artistAddModal')
+                                ->modalMethod('addArtist')
+                                ->toggleIcon('plus')
+                                ->toggleLabel(__("Artista"))
                                 ->searchColumns('name')
                                 ->value($this->music?->interpreters)
                                 ->fromModel(Artist::class, 'name'),
-
-                            ModalToggle::make('Adicionar Artista')
-                                ->modal('artistAddModal')
-                                ->method('addArtist')
-                                ->icon('plus'),
                         ]
                     ),
 
