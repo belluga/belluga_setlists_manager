@@ -204,12 +204,10 @@ class MusicEditScreen extends Screen
     public function createOrUpdate(Request $request)
     {
         if ($this->music?->id == true) {
-            $this->music->fill($request->get('music'))->save();
+            $this->_update($request);
         } else {
             $this->_create($request);
         }
-
-        Alert::info('Música adicionada com sucesso.');
 
         return redirect()->route('platform.music.list');
     }
@@ -217,7 +215,7 @@ class MusicEditScreen extends Screen
     /**
      * @param \Illuminate\Http\Request $request
      *
-     * @return Music
+     * @return void
      */
     private function _create(Request $request)
     {
@@ -245,29 +243,59 @@ class MusicEditScreen extends Screen
         $this->_attachGenders($request->genres);
         $this->_attachComposers($request->composers);
         $this->_attachInterpreters($request->interpreters);
+
+        Alert::info('Música adicionada com sucesso.');
     }
 
-    private function _attachGenders($list)
+    /**
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return void
+     */
+    private function _update(Request $request)
+    {
+        $validated_data = $request->validate(
+            [
+                "name" => ["required", "min:2", "max:255"],
+                "tone" => [
+                    "required",
+                    Rule::in(
+                        [
+                            'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'A', 'Bb', 'B'
+                        ]
+                    )
+                ],
+                "lyrics" => ["required", "min:10"],
+            ]
+        );
+
+        $this->music->update($validated_data);
+        $this->music->save();
+
+        $this->_attachGenders($request?->genres ?? []);
+        $this->_attachComposers($request?->composers ?? []);
+        $this->_attachInterpreters($request?->interpreters ?? []);
+
+        Alert::info('Música alterada com sucesso.');
+    }
+
+    private function _attachGenders(array $list)
     {
         $this->_attach('genres', $list);
     }
 
-    private function _attachComposers($list)
+    private function _attachComposers(array $list)
     {
         $this->_attach('composers', $list,  ['type' => 'composer']);
     }
 
-    private function _attachInterpreters($list)
+    private function _attachInterpreters(array $list)
     {
         $this->_attach('interpreters', $list, ['type' => 'interpreter']);
     }
 
-    private function _attach($type, $list, $pivotValues = null)
+    private function _attach($type, array $list, $pivotValues = null)
     {
-        if ($list == null) {
-            return;
-        }
-
         if ($pivotValues != null) {
             $list_with_attributes = [];
             foreach ($list as $item_id) {
