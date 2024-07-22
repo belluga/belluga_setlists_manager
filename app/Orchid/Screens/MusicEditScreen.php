@@ -76,7 +76,7 @@ class MusicEditScreen extends Screen
 
             Button::make('Deletar')
                 ->icon('trash')
-                ->method('remove')
+                ->method('removeCurrentMusic')
                 ->canSee($this->_musicExists()),
         ];
     }
@@ -281,10 +281,9 @@ class MusicEditScreen extends Screen
     /**
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function remove()
+    public function removeCurrentMusic()
     {
-        $this->music->delete();
-
+        $this->delete($this->music);
         return redirect()->route('platform.music.list');
     }
 
@@ -320,7 +319,6 @@ class MusicEditScreen extends Screen
     public function delete(Music $music)
     {
         Alert::info('Música removida com sucesso.');
-
         $music->delete();
     }
 }
