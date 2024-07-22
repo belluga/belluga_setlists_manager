@@ -239,9 +239,9 @@ class MusicEditScreen extends Screen
             ['owner' => Auth::id(), ...$validated_data]
         );
 
-        $this->_attachGenders($request->genres);
-        $this->_attachComposers($request->composers);
-        $this->_attachInterpreters($request->interpreters);
+        $this->_attachGenders($request?->genres ?? []);
+        $this->_attachComposers($request?->composers ?? []);
+        $this->_attachInterpreters($request?->interpreters ?? []);
 
         Alert::info('Música adicionada com sucesso.');
     }

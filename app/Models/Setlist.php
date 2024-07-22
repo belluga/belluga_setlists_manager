@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Orchid\Screen\AsSource;
@@ -21,9 +22,9 @@ class Setlist extends Model
         "owner"
     ];
 
-    public function owner(): HasOne
+    public function owner(): BelongsTo
     {
-        return $this->hasOne(User::class, "owner");
+        return $this->belongsTo(User::class, "owner");
     }
 
     public function sharedWith(): BelongsToMany
@@ -33,7 +34,7 @@ class Setlist extends Model
 
     public function musics(): BelongsToMany
     {
-        return $this->belongsToMany(Music::class);
+        return $this->belongsToMany(Music::class)->withTimestamps();
     }
 
     public function getSlugOptions(): SlugOptions
@@ -41,5 +42,10 @@ class Setlist extends Model
         return SlugOptions::create()
             ->generateSlugsFrom('name')
             ->saveSlugsTo('slug');
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

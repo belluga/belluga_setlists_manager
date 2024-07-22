@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 
-use App\Orchid\Layouts\Music\MusicListLayout;
+use App\Orchid\Layouts\Setlist\SetlistListLayout;
 
 class SetlistListScreen extends Screen
 {
@@ -54,7 +54,7 @@ class SetlistListScreen extends Screen
     public function layout(): iterable
     {
         return [
-            MusicListLayout::class
+            SetlistListLayout::class
         ];
     }
 }

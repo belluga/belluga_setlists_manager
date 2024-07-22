@@ -7,6 +7,7 @@ use App\Http\Controllers\MusicController;
 use App\Http\Controllers\SetlistController;
 use App\Orchid\Screens\Music\MusicEditScreen;
 use App\Orchid\Screens\Music\MusicListScreen;
+use App\Orchid\Screens\Setlist\SetlistEditScreen;
 use App\Orchid\Screens\Setlist\SetlistListScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
@@ -67,7 +68,7 @@ Route::middleware([
         Route::screen('/admin/musics', MusicListScreen::class)
             ->name('platform.music.list');
 
-        Route::screen('/admin/setlist/{setlist?}', SetlistListScreen::class)
+        Route::screen('/admin/setlist/{setlist?}', SetlistEditScreen::class)
             ->name('platform.setlist.edit')
             ->breadcrumbs(fn (Trail $trail) => $trail
                 ->parent('platform.index')

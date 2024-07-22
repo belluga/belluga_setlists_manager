@@ -31,7 +31,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->foreignIdFor(User::class, 'owner');
             $table->timestamps();
         });

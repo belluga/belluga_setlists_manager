@@ -63,4 +63,9 @@ class Music extends Model
             ->generateSlugsFrom('name')
             ->saveSlugsTo('slug');
     }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }
