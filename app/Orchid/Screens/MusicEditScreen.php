@@ -12,14 +12,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Orchid\Screen\Actions\ModalToggle;
-use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\RadioButtons;
 use Orchid\Screen\Fields\Relation;
-use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Fields\TextArea;
-use Orchid\Screen\Fields\UTM;
 use Orchid\Screen\Screen;
-use Orchid\Support\Color;
 use Orchid\Support\Facades\Alert;
 use Orchid\Support\Facades\Layout;
 
@@ -172,18 +168,18 @@ class MusicEditScreen extends Screen
                                 ->method('addGenre')
                                 ->icon('plus'),
 
-                            Relation::make('composer.')
+                            Relation::make('composers.')
                                 ->title('Compositores')
                                 ->multiple()
                                 ->searchColumns('name')
-                                ->value($this->music?->composer)
+                                ->value($this->music?->composers)
                                 ->fromModel(Artist::class, 'name'),
 
-                            Relation::make('interpreter.')
+                            Relation::make('interpreters.')
                                 ->title('Intérpretes')
                                 ->multiple()
                                 ->searchColumns('name')
-                                ->value($this->music?->interpreter)
+                                ->value($this->music?->interpreters)
                                 ->fromModel(Artist::class, 'name'),
 
                             ModalToggle::make('Adicionar Artista')
@@ -244,34 +240,42 @@ class MusicEditScreen extends Screen
             ['owner' => Auth::id(), ...$validated_data]
         );
 
-        $_genres = is_array($request->genres) ? $request->genres : $request->genres;
+        $this->_attachGenders($request->genres);
+        $this->_attachComposers($request->composers);
+        $this->_attachInterpreters($request->interpreters);
+    }
 
-        if ($_genres != null) {
-            // dd([
-            //     '$_genres' => $_genres,
-            //     '$this->music' => $this->music,
-            //     '$this->music->genres' => $this->music->genres(),
-            //     'find' => Music::find($this->music->id),
-            // ]);
-            $this->music->genres()->sync($_genres);
+    private function _attachGenders($list)
+    {
+        $this->_attach('genres', $list);
+    }
+
+    private function _attachComposers($list)
+    {
+        $this->_attach('composers', $list,  ['type' => 'composer']);
+    }
+
+    private function _attachInterpreters($list)
+    {
+        $this->_attach('interpreters', $list, ['type' => 'interpreter']);
+    }
+
+    private function _attach($type, $list, $pivotValues = null)
+    {
+        if ($list == null) {
+            return;
         }
 
+        if ($pivotValues != null) {
+            $list_with_attributes = [];
+            foreach ($list as $item_id) {
+                $list_with_attributes[$item_id] = $pivotValues;
+            }
 
-        // if (is_array($request->composer)) {
-        //     foreach ($request->composer as $composer) {
-        //         $artist = Artist::find($composer);
-        //         if ($artist != null) {
-        //             $this->music->composer->attach($artist);
-        //         }
-        //     }
-        // }
+            $list = $list_with_attributes;
+        }
 
-        // if (is_array($request->interpreter)) {
-        //     foreach ($request->interpreter as $interpreter) {
-        //         dd($interpreter);
-        //         $music->interpreter->attach($interpreter);
-        //     }
-        // }
+        $this->music->$type()->sync($list);
     }
 
     /**
@@ -280,8 +284,6 @@ class MusicEditScreen extends Screen
     public function remove()
     {
         $this->music->delete();
-
-        Alert::info('Música removida com sucesso.');
 
         return redirect()->route('platform.music.list');
     }
@@ -317,6 +319,8 @@ class MusicEditScreen extends Screen
 
     public function delete(Music $music)
     {
+        Alert::info('Música removida com sucesso.');
+
         $music->delete();
     }
 }

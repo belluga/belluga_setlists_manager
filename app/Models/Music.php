@@ -17,12 +17,11 @@ class Music extends Model
 
     protected $table = "musics";
 
+    protected $with = ['genres', 'composers', 'interpreters'];
+
     protected $fillable = [
         "name",
         "tone",
-        "composer",
-        "interpreter",
-        "genres",
         "play_settings",
         "lyrics",
         "owner"
@@ -33,7 +32,7 @@ class Music extends Model
         return $this->belongsTo(User::class, "owner");
     }
 
-    public function musics(): BelongsToMany
+    public function sharedWith(): BelongsToMany
     {
         return $this->belongsToMany(User::class)->withTimestamps();
     }
@@ -46,6 +45,16 @@ class Music extends Model
     public function genres(): BelongsToMany
     {
         return $this->belongsToMany(Genre::class)->withTimestamps();
+    }
+
+    public function composers(): BelongsToMany
+    {
+        return $this->belongsToMany(Artist::class)->wherePivot('type', '=', 'composer');
+    }
+
+    public function interpreters(): BelongsToMany
+    {
+        return $this->belongsToMany(Artist::class)->wherePivot('type', '=', 'interpreter');
     }
 
     public function getSlugOptions(): SlugOptions
