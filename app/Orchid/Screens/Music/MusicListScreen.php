@@ -2,6 +2,7 @@
 
 namespace App\Orchid\Screens\Music;
 
+use App\DataTables\MusicsDataTable;
 use Illuminate\Support\Facades\Auth;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
@@ -44,6 +45,10 @@ class MusicListScreen extends Screen
                 ->icon('pencil')
                 ->route('platform.music.edit')
         ];
+    }
+
+    public function dataTable(MusicsDataTable $datatable){
+
     }
 
     /**

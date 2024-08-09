@@ -1,5 +1,6 @@
 import './bootstrap';
 import ChordSheetJS from 'chordsheetjs';
+import 'laravel-datatables-vite';
 // import '../css/argon-dashboard/nucleo-icons.css'
 // import '../css/argon-dashboard/nucleo-svg.css'
 // import '../css/argon-dashboard/perfect-scrollbar.css'

@@ -5,4 +5,5 @@ return [
     MongoDB\Laravel\MongoDBServiceProvider::class,
     MongoDB\Laravel\Auth\PasswordResetServiceProvider::class,
     App\Providers\TenancyServiceProvider::class,
+    Yajra\DataTables\DataTablesServiceProvider::class,
 ];
