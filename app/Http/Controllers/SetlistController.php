@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Music;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class SetlistController extends Controller
@@ -10,7 +11,7 @@ class SetlistController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): void
     {
         //
     }
@@ -18,7 +19,7 @@ class SetlistController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): void
     {
         //
     }
@@ -26,7 +27,7 @@ class SetlistController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): void
     {
         //
     }
@@ -34,7 +35,7 @@ class SetlistController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show_single(Music $music)
+    public function show_single(Music $music): View
     {
         return view('setlists.setlitsts_my', [
             'musics' => Music::where('tone', "A")->get()
@@ -44,7 +45,7 @@ class SetlistController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show_my(Music $music)
+    public function show_my(Music $music): View
     {
         return view('setlists.setlitsts_my', [
             'musics' => Music::where('tone', "A")->get()
@@ -54,7 +55,7 @@ class SetlistController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show_shared_with_me(Music $music)
+    public function show_shared_with_me(Music $music): View
     {
         return view('setlists.setlitsts_shared_with_me', [
             'musics' => Music::where('tone', "A")->get()
@@ -64,7 +65,7 @@ class SetlistController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Music $music)
+    public function edit(Music $music): void
     {
         //
     }
@@ -72,7 +73,7 @@ class SetlistController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Music $music)
+    public function update(Request $request, Music $music): void
     {
         //
     }
@@ -80,7 +81,7 @@ class SetlistController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Music $music)
+    public function destroy(Music $music): void
     {
         //
     }

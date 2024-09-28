@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Music;
 use App\Models\MusicGenre;
 use App\Models\User;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -22,7 +24,7 @@ class MusicController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
         return view('musics.music_create');
     }
@@ -30,7 +32,7 @@ class MusicController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $validated_data = $request->validate(
             [
@@ -57,7 +59,7 @@ class MusicController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Music $music)
+    public function show(Music $music): View
     {
         return view('musics.music_show', [
             'music' => $music
@@ -67,7 +69,7 @@ class MusicController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show_my()
+    public function show_my(): View
     {
 
         $musics = Auth::user()->musics;
@@ -80,7 +82,7 @@ class MusicController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show_shared_with_me(Music $music)
+    public function show_shared_with_me(Music $music): View
     {
         $music_sharings = Auth::user()->musics_shared_with_me;
 
@@ -98,7 +100,7 @@ class MusicController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Music $music)
+    public function edit(Music $music): void
     {
         //
     }
@@ -106,7 +108,7 @@ class MusicController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Music $music)
+    public function update(Request $request, Music $music): void
     {
         //
     }
@@ -114,7 +116,7 @@ class MusicController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Music $music)
+    public function destroy(Music $music): void
     {
         //
     }

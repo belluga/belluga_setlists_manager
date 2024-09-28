@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
+    public function register(Request $request): RedirectResponse
     {
         $validated_fields =  $request->validate([
             'first_name' => ['required', 'max:50', 'min:2'],
@@ -23,7 +24,7 @@ class AuthController extends Controller
         return redirect()->intended();
     }
 
-    public function login(Request $request)
+    public function login(Request $request): RedirectResponse
     {
         $validated_credentials = $request->validate([
             'email' => ['required', 'max:255', 'email'],
@@ -42,7 +43,7 @@ class AuthController extends Controller
         return back()->withErrors(['login_error' => 'Email ou senha incorretos.']);
     }
 
-    public function logout(Request $request)
+    public function logout(Request $request): RedirectResponse
     {
         Auth::logout();
         $request->session()->invalidate();
