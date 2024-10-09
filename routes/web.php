@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\Api\MusicApiController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MusicController;
+use App\Http\Controllers\Api\SetlistApiController;
 use App\Http\Controllers\SetlistController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 Route::middleware('guest')->group(function () {
     Route::get('/register', function () {
@@ -41,4 +44,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/setlists_shared_with_me', [SetlistController::class, 'show_shared_with_me'])->name('setlists_shared');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
+
+Route::middleware('api')->group(function () {
+    Route::get('/api/user', function (Request $request) {
+        return $request->user();
+    });
+
+    Route::apiResource('/api/setlists', SetlistApiController::class);
+    Route::apiResource('/api/musics', MusicApiController::class);
 });

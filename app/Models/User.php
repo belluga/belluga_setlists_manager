@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Casts\ObjectIDCast;
 use App\Models\Sharing\SharingMusic;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use MongoDB\Laravel\Auth\User as Authenticatable;
@@ -38,7 +39,7 @@ class User extends Authenticatable
 
     public function musics(): HasMany
     {
-        return $this->hasMany(Music::class, "owner");
+        return $this->hasMany(Music::class, "_id", "owner_id");
     }
 
 
@@ -50,6 +51,7 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
+            '_id' => ObjectIDCast::class,
             'email_verified_at' => 'datetime',
             'updated_at' => 'datetime',
             'created_at' => 'datetime',
