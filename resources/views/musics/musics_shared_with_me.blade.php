@@ -11,7 +11,8 @@
         <div class="container px-4 mx-auto">
             <div class="flex flex-wrap -m-3">
                 @foreach ($musics as $music)
-                    <x-musics.music_card :music='$music' />
+                    <p>{{$music->name}}</p>
+{{--                    <x-musics.music_card :music='$music' />--}}
                 @endforeach
             </div>
         </div>
