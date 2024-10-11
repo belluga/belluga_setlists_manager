@@ -6,13 +6,14 @@ namespace App\Models;
 
 use App\Models\Sharing\SharingMusic;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Laravel\Sanctum\HasApiTokens;
 use MongoDB\Laravel\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use MongoDB\Laravel\Relations\HasMany;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -38,7 +39,7 @@ class User extends Authenticatable
 
     public function musics(): HasMany
     {
-        return $this->hasMany(Music::class, "owner");
+        return $this->hasMany(Music::class, "owner_id");
     }
 
 
