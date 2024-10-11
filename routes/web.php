@@ -3,7 +3,9 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MusicController;
 use App\Http\Controllers\SetlistController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 Route::middleware('guest')->group(function () {
     Route::get('/register', function () {
@@ -41,4 +43,20 @@ Route::middleware('auth')->group(function () {
     Route::get('/setlists_shared_with_me', [SetlistController::class, 'show_shared_with_me'])->name('setlists_shared');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    Route::get('/code', function (Request $request) {
+        $request->session()->put('state', $state = Str::random(40));
+
+        $query = http_build_query([
+            'client_id' => '9d386c91-82a3-4e20-be26-f3da63703977',
+            'client_secret' => 'f64iIME1380tTwtUmJvcl4vpNCZ5ZXzALnY9Xrl4',
+            'redirect_uri' => 'http://localhost:8000',
+            'response_type' => 'code',
+            'scope' => '',
+            'state' => $state,
+            // 'prompt' => '', // "none", "consent", or "login"
+        ]);
+
+        return redirect('http://localhost:8000/oauth/authorize?'.$query);
+    });
 });

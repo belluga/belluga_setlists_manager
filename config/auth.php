@@ -41,6 +41,11 @@ return [
             'provider' => 'users',
         ],
 
+        'api' => [
+            'driver' => 'passport',
+            'provider' => 'users',
+        ],
+
         'mongodb' => [
             'driver' => 'session',
             'provider' => 'users',
