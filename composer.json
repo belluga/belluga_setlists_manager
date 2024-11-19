@@ -8,9 +8,10 @@
         "php": "^8.2",
         "blade-ui-kit/blade-icons": "^1.6",
         "diglactic/laravel-breadcrumbs": "^9.0",
-        "laravel/framework": "^11.9",
-        "laravel/tinker": "^2.9",
-        "mongodb/laravel-mongodb": "4.5",
+        "laravel/framework": "^11.33",
+        "laravel/tinker": "^2.10",
+        "mongodb/laravel-mongodb": "5.0.2",
+        "mongodb/mongodb": "1.18.0",
         "spatie/laravel-sluggable": "^3.6",
         "stancl/tenancy": "^3.8"
     },
